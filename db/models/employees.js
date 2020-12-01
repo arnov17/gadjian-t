@@ -1,9 +1,9 @@
 const sequelize = require("../../config/sequelize");
 const Sequelize = require("sequelize");
 
-class Employees extends Sequelize.Model {}
+class EmployeeModel extends Sequelize.Model {}
 
-Employees.init(
+EmployeeModel.init(
   {
     id: {
       type: Sequelize.INTEGER(10),
@@ -28,5 +28,5 @@ Employees.init(
 );
 
 module.exports = {
-  Employees,
+  EmployeeModel,
 };

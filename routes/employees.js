@@ -4,11 +4,11 @@ const router = Router();
 
 const employController = require("../controllers/employ-controller");
 
-// router.get("employees", employController.findById);
-// router.get("employees/:id", employController.findById);
-// router.post("employees", employController.findById);
-// router.put("employees", employController.findById);
-// router.delete("employees/:id", employController.findById);
+router.get("/read", employController.read);
+router.get("/read/:id", employController.findById);
+router.post("/register", employController.create);
+router.put("/update", employController.update);
+router.delete("/delete/:id", employController.delete);
 
 // router.post("", employController.findById);
 // router.post("", employController.findById);

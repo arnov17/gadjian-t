@@ -81,15 +81,17 @@ exports.update = async (req, res, next) => {
       data: updateEmployee,
     });
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     return next(error);
   }
 };
 
 exports.delete = async (req, res, next) => {
   try {
-    const { id } = req.body;
-    //   console.log(id);
+    const params = req.params;
+    const id = params.id;
+    // const { id } = req.body;
+    console.log(id);
 
     await EmployeeModel.destroy({
       where: {

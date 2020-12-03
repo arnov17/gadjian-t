@@ -4,6 +4,6 @@ const router = Router();
 
 const combinationController = require("../controllers/combination-controller");
 
-router.post("/create", combinationController.create);
+router.post("/", combinationController.create);
 
 module.exports = router;

@@ -2,8 +2,8 @@ const { Router } = require("express");
 
 const router = Router();
 
-const fibonacciController = require("../controllers/reverse-controller");
+const fibonacciController = require("../controllers/fibonacci-controller");
 
-router.post("/register", fibonacciController.create);
+router.post("/", fibonacciController.create);
 
 module.exports = router;

@@ -4,6 +4,6 @@ const router = Router();
 
 const reverseController = require("../controllers/reverse-controller");
 
-router.post("/register", reverseController.create);
+router.post("/", reverseController.create);
 
 module.exports = router;

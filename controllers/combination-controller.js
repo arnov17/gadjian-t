@@ -1,15 +1,13 @@
+const faktorial = require("../function/combination-func");
+
 exports.create = (req, res, next) => {
   try {
     const { n, r } = req.body;
 
-    function faktorial(k) {
-      var number = 1;
-      var result = 1;
-      while (number <= k) {
-        result = result * number;
-        number = number + 1;
-      }
-      return result;
+    if (n <= r) {
+      return res.status(409).send({
+        message: "submit error, n > r",
+      });
     }
 
     let resultComb = faktorial(n) / (faktorial(r) * faktorial(n - r));

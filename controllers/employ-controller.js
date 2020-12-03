@@ -38,18 +38,23 @@ exports.findById = async (req, res) => {
     const id = params.id;
 
     const findEmployee = await EmployeeModel.findByPk(id);
+    if (!findEmployee) {
+      return res.status(404).json({
+        message: "Employee not found",
+      });
+    }
     res.send(findEmployee);
   } catch (error) {
-    res.status(500).send({
-      message: "Error when find employee by id",
-    });
+    return next(error);
   }
 };
 
 exports.update = async (req, res, next) => {
   try {
-    const { id, name, phone_number, jobtitle } = req.body;
-    console.log(req.body);
+    const { name, phone_number, jobtitle } = req.body;
+    // console.log(req.body);
+    const params = req.params;
+    const id = params.id;
 
     const existEmployee = await EmployeeModel.findOne({
       where: {
@@ -58,9 +63,9 @@ exports.update = async (req, res, next) => {
     });
 
     if (!existEmployee) {
-      const error = new Error("employee not found");
-      error.statusCode = 404;
-      throw error;
+      return res.status(404).json({
+        message: "Employee not found",
+      });
     }
 
     const updateEmployee = await EmployeeModel.update(
@@ -81,7 +86,6 @@ exports.update = async (req, res, next) => {
       data: updateEmployee,
     });
   } catch (error) {
-    // console.log(error);
     return next(error);
   }
 };
@@ -91,38 +95,25 @@ exports.delete = async (req, res, next) => {
     const params = req.params;
     const id = params.id;
     // const { id } = req.body;
-    console.log(id);
+    // console.log(id);
 
-    await EmployeeModel.destroy({
+    const existEmployee = await EmployeeModel.destroy({
       where: {
         id: id,
       },
     });
+
+    if (!existEmployee) {
+      return res.status(404).json({
+        message: "Employee not found",
+      });
+    }
+
     return res.status(200).json({
       message: "Success delete Employee",
     });
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     return next(error);
   }
 };
-
-// // reverse
-// exports.create = async (req, res, next) => {
-//   try {
-//     const { character } = req.body;
-
-//     const reverseChar = await EmployeeModel.create({
-//       name,
-//       phone_number,
-//       jobtitle,
-//     });
-
-//     return res.status(200).json({
-//       message: "Success create new employee",
-//       data: reverseChar,
-//     });
-//   } catch (error) {
-//     return next(error);
-//   }
-// };
